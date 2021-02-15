@@ -266,6 +266,43 @@
           </dependency>
         </dependencies>
       </plugin>
+      
+      <plugin>
+        <groupId>io.fabric8</groupId>
+        <artifactId>docker-maven-plugin</artifactId>
+        <version>0.34.1</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>build</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <images>
+            <image>
+              <name>spring-petclinic:latest</name>
+              <build>
+                <from>openjdk:17-slim</from>
+                <assembly>
+                  <inline>
+                    <files>
+                      <file>
+                        <source>${project.build.directory}/spring-petclinic-${project.version}.jar</source>
+                      </file>
+                    </files>
+                  </inline>
+                </assembly>
+              </build>
+              <cmd>
+                <shell>java -jar spring-petclinic-${project.version}.jar</shell>
+              </cmd>
+            </image>
+          </images>
+        </configuration>
+      </plugin>
+
     </plugins>
   </build>
 
