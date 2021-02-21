@@ -285,7 +285,9 @@
               <name>spring-petclinic:latest</name>
               <build>
                 <from>openjdk:17-slim</from>
+		<workdir>/app</workdir>
                 <assembly>
+		  <targetDir>/app</targetDir>
                   <inline>
                     <files>
                       <file>
@@ -294,10 +296,10 @@
                     </files>
                   </inline>
                 </assembly>
-              </build>
-              <cmd>
-                <shell>java -jar spring-petclinic-${project.version}.jar</shell>
-              </cmd>
+		<cmd>
+                  <shell>java -jar spring-petclinic-${project.version}.jar</shell>
+		</cmd>
+              </build>              
             </image>
           </images>
         </configuration>
